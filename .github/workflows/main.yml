@@ -5,7 +5,7 @@ on: push
 
 jobs:
   build-ios:
-    runs-on: macos-latest-stable
+    runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
