@@ -5,7 +5,7 @@ on: push
 
 jobs:
   build-ios:
-    runs-on: macos-latest
+    runs-on: macos-10.15.3
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -32,8 +32,14 @@ jobs:
       - run: pod install
         working-directory: ios
 
-      - run: xcodebuild clean archive -workspace reactNativeCiCd.xcworkspace -scheme reactNativeCiCd -archivePath reactNativeCiCd.xcarchive CODE_SIGNING_ALLOWED=NO | xcpretty
+      - run: xcodebuild clean archive -workspace reactNativeCiCd.xcworkspace -scheme reactNativeCiCd -archivePath reactNativeCiCd.xcarchive CODE_SIGNING_ALLOWED=NO 
         working-directory: ios
+        
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+           name: xcarchive
+           path: reactNativeCiCd.xcarchive  
 
 
   build-android:
